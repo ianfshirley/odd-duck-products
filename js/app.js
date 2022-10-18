@@ -112,7 +112,7 @@ function renderChart() {
         label: 'Number of Views',
         data: duckViews,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
+          '#966666',
         ],
         borderColor: [
           'rgb(255, 99, 132)',
