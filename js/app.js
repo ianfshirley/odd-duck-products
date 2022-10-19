@@ -94,6 +94,8 @@ function handleClick(event) {
   // console.log(allOddDuck);
 }
 
+Chart.defaults.font.size = 20;
+
 function renderChart() {
 
   let duckNames = [];

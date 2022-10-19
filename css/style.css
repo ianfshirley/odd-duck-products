@@ -84,16 +84,16 @@ article {
 footer {
   grid-row: 3 / 4;
   grid-column: 1 / 5;
-  width: 100%;
+  /* width: 100%; */
   background-color: #d0dcee;
   display: flex;
   margin: auto;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 }
 
 #resultsButton {
   background-color: #EEE2D0;
-  align-self: flex-start;
+  /* align-self: flex-start; */
   width: 10em;
   height: 2em;
   font-size: 2em;
@@ -103,7 +103,11 @@ footer {
   margin: 1em;
 }
 
-#myChart {
-  
-  margin: auto;
+#chartDiv {
+  width: 150em;
 }
+
+/* #myChart {
+  height: 10em;
+  margin: auto;
+} */
