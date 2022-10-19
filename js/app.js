@@ -94,6 +94,8 @@ function handleClick(event) {
   // console.log(allOddDuck);
 }
 
+Chart.defaults.font.size = 20;
+
 function renderChart() {
 
   let duckNames = [];
@@ -115,7 +117,7 @@ function renderChart() {
           '#966666',
         ],
         borderColor: [
-          'rgb(255, 99, 132)',
+          'rgb(100, 20, 20)',
         ],
         borderWidth: 1
       },
@@ -123,10 +125,10 @@ function renderChart() {
         label: 'Number of Votes',
         data: duckScore,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
+          '#485F6C',
         ],
         borderColor: [
-          'rgb(255, 99, 132)',
+          '#243037',
         ],
         borderWidth: 1
       }
