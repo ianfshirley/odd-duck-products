@@ -1,11 +1,15 @@
 'use strict';
 
+// GLOBAL VARIABLES
+
 let myContainer = document.querySelector('section');
 let resultsButton = document.querySelector('#resultsButton');
 
 let image1 = document.querySelector('section img:first-child');
 let image2 = document.querySelector('section img:nth-child(2)');
 let image3 = document.querySelector('section img:nth-child(3)');
+
+let ul = document.querySelector('ul');
 
 let howManyTimesVoted = 0;
 let maxNumberOfVotes = 25;
@@ -14,6 +18,7 @@ let indexArray = [];
 
 let allOddDuck = [];
 
+// CONSTRUCTOR
 
 function OddDuck(name, fileExtension = 'jpeg') {
   this.name = name;
@@ -23,29 +28,61 @@ function OddDuck(name, fileExtension = 'jpeg') {
   allOddDuck.push(this);
 }
 
-new OddDuck('bag');
-new OddDuck('banana');
-new OddDuck('bathroom');
-new OddDuck('boots');
-new OddDuck('breakfast');
-new OddDuck('bubblegum');
-new OddDuck('chair');
-new OddDuck('cthulhu');
-new OddDuck('dog-duck');
-new OddDuck('pen');
-new OddDuck('pet-sweep');
-new OddDuck('scissors');
-new OddDuck('shark');
-new OddDuck('sweep', 'png');
-new OddDuck('tauntaun');
-new OddDuck('unicorn');
-new OddDuck('water-can');
-new OddDuck('wine-glass');
+//function to get data from local storage
+function getDuckData() {
+  //check if local storage has results data
+  let duckResults = localStorage.getItem('results');
+  // if yes, unpack (parse)
+  if (duckResults) {
+    let parsedResults = JSON.parse(duckResults);
+    console.log(parsedResults);
+    for (let i = 0; i < parsedResults.length; i++) {
+      let name = parsedResults[i].name;
+      let newDuck = new OddDuck(name);
+      newDuck.score = parsedResults[i].score;
+      newDuck.src = parsedResults[i].src;
+      newDuck.views = parsedResults[i].views;
+    }
+  }else {
+    new OddDuck('bag');
+    new OddDuck('banana');
+    new OddDuck('bathroom');
+    new OddDuck('boots');
+    new OddDuck('breakfast');
+    new OddDuck('bubblegum');
+    new OddDuck('chair');
+    new OddDuck('cthulhu');
+    new OddDuck('dog-duck');
+    new OddDuck('pen');
+    new OddDuck('pet-sweep');
+    new OddDuck('scissors');
+    new OddDuck('shark');
+    new OddDuck('sweep', 'png');
+    new OddDuck('tauntaun');
+    new OddDuck('unicorn');
+    new OddDuck('water-can');
+    new OddDuck('wine-glass');
+  }
+}
 
+
+
+// function to select a random photo
 function selectRandomOddDuck() {
   return Math.floor(Math.random() * allOddDuck.length);
 }
 
+// prototype method to render view/vote results for one odd duck
+OddDuck.prototype.renderDuckResult = function() {
+  //create li:
+  let li = document.createElement('li');
+  //add content (text)
+  li.textContent = `${this.name} has been viewed ${this.views} times, and has received ${this.score} votes.`;
+  //append to parent
+  ul.appendChild(li);
+};
+
+// function to render the 3 product photos using selectRandomOddDuck function
 function renderOddDuck() {
   while (indexArray.length < 6) {
     let ranNum = selectRandomOddDuck();
@@ -68,12 +105,27 @@ function renderOddDuck() {
   allOddDuck[duck2].views++;
 }
 
+function renderAllResults() {
+  for (let i=0; i < allOddDuck.length; i++) {
+    allOddDuck[i].renderDuckResult();
+  }
+}
+
+//function to save results to local storage
+function storeDuckData() {
+  //turn data into a string
+  let stringifiedAllOddDuck = JSON.stringify(allOddDuck);
+  // console.log(stringifiedAllOddDuck);
+  //put data into local storage
+  //create key for the data I want in local storage
+  // 'results' is my key
+  localStorage.setItem('results', stringifiedAllOddDuck);
+}
 
 function handleClick(event) {
   if (event.target === myContainer) {
     alert('Please click on an image');
   }
-  console.log(event.target.alt);
   howManyTimesVoted++;
   let clickedOddDuck = event.target.alt;
 
@@ -88,16 +140,17 @@ function handleClick(event) {
     myContainer.removeEventListener('click', handleClick);
     resultsButton.className = 'clicks-allowed';
     resultsButton.addEventListener('click', renderChart);
+    storeDuckData();
   }else {
     renderOddDuck();
   }
-  // console.log(allOddDuck);
 }
 
 Chart.defaults.font.size = 20;
 
 function renderChart() {
 
+  renderAllResults();
   let duckNames = [];
   let duckViews = [];
   let duckScore = [];
@@ -154,8 +207,10 @@ function renderChart() {
   );
 }
 
-
+getDuckData();
 
 myContainer.addEventListener('click', handleClick);
 
 renderOddDuck();
+
+

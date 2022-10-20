@@ -46,6 +46,10 @@ ul {
   grid-row: 1 / 3;
   grid-column: 1 / 2;
   background-color: #C69496;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
 }
 
 section {
@@ -84,7 +88,7 @@ article {
 footer {
   grid-row: 3 / 4;
   grid-column: 1 / 5;
-  /* width: 100%; */
+  width: 100%;
   background-color: #d0dcee;
   display: flex;
   margin: auto;
@@ -96,7 +100,7 @@ footer {
   /* align-self: flex-start; */
   width: 10em;
   height: 2em;
-  font-size: 2em;
+  font-size: 1.5em;
   text-align: center;
   padding: 0.5rem 1rem;
   border: 5px ridge #243037;
@@ -104,7 +108,7 @@ footer {
 }
 
 #chartDiv {
-  width: 150em;
+  /* width: 150em; */
 }
 
 /* #myChart {
