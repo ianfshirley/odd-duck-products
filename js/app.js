@@ -36,28 +36,35 @@ function getDuckData() {
   if (duckResults) {
     let parsedResults = JSON.parse(duckResults);
     console.log(parsedResults);
+    for (let i = 0; i < parsedResults.length; i++) {
+      let name = parsedResults[i].name;
+      let newDuck = new OddDuck(name);
+      newDuck.score = parsedResults[i].score;
+      newDuck.src = parsedResults[i].src;
+      newDuck.views = parsedResults[i].views;
+    }
+  }else {
+    new OddDuck('bag');
+    new OddDuck('banana');
+    new OddDuck('bathroom');
+    new OddDuck('boots');
+    new OddDuck('breakfast');
+    new OddDuck('bubblegum');
+    new OddDuck('chair');
+    new OddDuck('cthulhu');
+    new OddDuck('dog-duck');
+    new OddDuck('pen');
+    new OddDuck('pet-sweep');
+    new OddDuck('scissors');
+    new OddDuck('shark');
+    new OddDuck('sweep', 'png');
+    new OddDuck('tauntaun');
+    new OddDuck('unicorn');
+    new OddDuck('water-can');
+    new OddDuck('wine-glass');
   }
 }
 
-// wrap all these inside the getDucks function (or whatever you call the function pulling from local storage):
-new OddDuck('bag');
-new OddDuck('banana');
-new OddDuck('bathroom');
-new OddDuck('boots');
-new OddDuck('breakfast');
-new OddDuck('bubblegum');
-new OddDuck('chair');
-new OddDuck('cthulhu');
-new OddDuck('dog-duck');
-new OddDuck('pen');
-new OddDuck('pet-sweep');
-new OddDuck('scissors');
-new OddDuck('shark');
-new OddDuck('sweep', 'png');
-new OddDuck('tauntaun');
-new OddDuck('unicorn');
-new OddDuck('water-can');
-new OddDuck('wine-glass');
 
 
 // function to select a random photo
@@ -201,7 +208,7 @@ function renderChart() {
   );
 }
 
-
+getDuckData();
 
 myContainer.addEventListener('click', handleClick);
 
