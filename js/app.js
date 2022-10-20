@@ -115,7 +115,7 @@ function renderAllResults() {
 function storeDuckData() {
   //turn data into a string
   let stringifiedAllOddDuck = JSON.stringify(allOddDuck);
-  console.log(stringifiedAllOddDuck);
+  // console.log(stringifiedAllOddDuck);
   //put data into local storage
   //create key for the data I want in local storage
   // 'results' is my key
@@ -126,7 +126,6 @@ function handleClick(event) {
   if (event.target === myContainer) {
     alert('Please click on an image');
   }
-  console.log(event.target.alt);
   howManyTimesVoted++;
   let clickedOddDuck = event.target.alt;
 
